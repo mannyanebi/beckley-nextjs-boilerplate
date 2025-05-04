@@ -1,5 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import eslintConfigPrettier from "eslint-config-prettier";
 import tailwind from "eslint-plugin-tailwindcss";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
@@ -14,12 +15,17 @@ const compat = new FlatCompat({
   allConfig: js.configs.all,
 });
 
+
+
 const config = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   eslintConfigPrettier,
   ...tailwind.configs["flat/recommended"],
+  ...pluginQuery.configs["flat/recommended"],
   {
-    plugins: { "unused-imports": pluginUnusedImports },
+    plugins: {
+      "unused-imports": pluginUnusedImports,
+    },
 
     languageOptions: {
       // globals: {
@@ -89,6 +95,7 @@ const config = [
       "prefer-const": "error",
       "prefer-destructuring": "error",
       "prefer-object-spread": "warn",
+      "padding-line-between-statements": "off",
 
       "sort-keys": [
         "off",
@@ -111,7 +118,7 @@ const config = [
         },
       ],
       "react/jsx-sort-props": [
-        "warn",
+        "off",
         {
           ignoreCase: true,
         },
